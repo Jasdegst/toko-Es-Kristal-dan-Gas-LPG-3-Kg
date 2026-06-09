@@ -1,60 +1,45 @@
 const form = document.getElementById("orderForm");
-const statusText = document.getElementById("status");
+const status = document.getElementById("status");
 
 form.addEventListener("submit", async (e) => {
 
-  e.preventDefault();
+    e.preventDefault();
 
-  statusText.innerHTML = "Mengirim pesanan...";
+    status.innerHTML = "Mengirim pesanan...";
 
-  const data = {
-    nama: document.getElementById("nama").value,
-    hp: document.getElementById("hp").value,
-    produk: document.getElementById("produk").value,
-    jumlah: document.getElementById("jumlah").value,
-    alamat: document.getElementById("alamat").value
-  };
+    const nama = document.getElementById("nama").value;
+    const hp = document.getElementById("hp").value;
+    const produk = document.getElementById("produk").value;
+    const jumlah = document.getElementById("jumlah").value;
+    const alamat = document.getElementById("alamat").value;
 
-  try {
+    const url =
+        "https://script.google.com/macros/s/AKfycbwo70jkZ76DsIBL765k2hshiwZjJ40pChFUsb9qx-iFvIH9tmaS2rWPqcSEFNdGaqjV/exec" +
+        "?nama=" + encodeURIComponent(nama) +
+        "&hp=" + encodeURIComponent(hp) +
+        "&produk=" + encodeURIComponent(produk) +
+        "&jumlah=" + encodeURIComponent(jumlah) +
+        "&alamat=" + encodeURIComponent(alamat);
 
-    const response = await fetch(
-      "https://script.google.com/macros/s/AKfycbyyiFLxQ3ap29RuinFjMwlJF6X5V3-YgL60rlCNpE5TBhfc3KSYZP-D1ouDQ0Rw25uHwA/exec",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      }
-    );
+    try {
 
-    const result = await response.text();
+        await fetch(url, {
+            method: "GET",
+            mode: "no-cors"
+        });
 
-    console.log("Response:", result);
+        status.innerHTML =
+            "✅ Pesanan berhasil dikirim.";
 
-    if (response.ok) {
+        form.reset();
 
-      statusText.innerHTML =
-        "✅ Pesanan berhasil dikirim!";
+    } catch (err) {
 
-      form.reset();
+        console.error(err);
 
-    } else {
-
-      statusText.innerHTML =
-        "❌ Server mengembalikan error.";
-
-      console.error(result);
+        status.innerHTML =
+            "❌ Gagal mengirim pesanan.";
 
     }
-
-  } catch (error) {
-
-    console.error("ERROR:", error);
-
-    statusText.innerHTML =
-      "❌ Gagal mengirim pesanan.";
-
-  }
 
 });
