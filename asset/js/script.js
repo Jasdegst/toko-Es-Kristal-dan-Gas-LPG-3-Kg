@@ -1,7 +1,7 @@
 const form = document.getElementById("orderForm");
 const status = document.getElementById("status");
 
-form.addEventListener("submit", async (e) => {
+form.addEventListener("submit", function(e) {
 
     e.preventDefault();
 
@@ -21,25 +21,13 @@ form.addEventListener("submit", async (e) => {
         "&jumlah=" + encodeURIComponent(jumlah) +
         "&alamat=" + encodeURIComponent(alamat);
 
-    try {
+    const img = new Image();
 
-        await fetch(url, {
-            method: "GET",
-            mode: "no-cors"
-        });
+    console.log(url);
+    img.src = url;
 
-        status.innerHTML =
-            "✅ Pesanan berhasil dikirim.";
+    status.innerHTML = "✅ Pesanan berhasil dikirim!";
 
-        form.reset();
-
-    } catch (err) {
-
-        console.error(err);
-
-        status.innerHTML =
-            "❌ Gagal mengirim pesanan.";
-
-    }
+    form.reset();
 
 });
