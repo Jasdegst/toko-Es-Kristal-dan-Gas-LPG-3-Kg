@@ -29,7 +29,7 @@ document.getElementById("alamat").value
 try{
 
 await fetch(
-"URL_APPS_SCRIPT",
+"https://script.google.com/macros/s/AKfycbwbalHc2z9sTy9rPFZILIiAODi7ePbU7uQ8WESkDnJ2usCRXfU-4hmyrMPWUnDwKGs8Zg/exec",
 {
 method:"POST",
 body:JSON.stringify(data)
