@@ -1,53 +1,24 @@
-const form =
-document.getElementById("orderForm");
+try {
 
-form.addEventListener(
-"submit",
-async (e)=>{
+  const response = await fetch(
+    "https://script.google.com/macros/s/AKfycbwdK5bh0oZmNk0S_ZWGoDbGnCSHntHTKJax9813Z3qQh4jSJXf0unmLDPqg6jON_q7OOA/exec",
+    {
+      method: "POST",
+      body: JSON.stringify(data)
+    }
+  );
 
-e.preventDefault();
+  const result = await response.text();
 
-const data = {
+  console.log(result);
 
-nama:
-document.getElementById("nama").value,
+  document.getElementById("status")
+    .innerHTML = "Pesanan berhasil dikirim!";
 
-hp:
-document.getElementById("hp").value,
+} catch(error) {
 
-produk:
-document.getElementById("produk").value,
+  console.error(error);
 
-jumlah:
-document.getElementById("jumlah").value,
-
-alamat:
-document.getElementById("alamat").value
-
-};
-
-try{
-
-await fetch(
-"https://script.google.com/macros/s/AKfycbwbalHc2z9sTy9rPFZILIiAODi7ePbU7uQ8WESkDnJ2usCRXfU-4hmyrMPWUnDwKGs8Zg/exec",
-{
-method:"POST",
-body:JSON.stringify(data)
+  document.getElementById("status")
+    .innerHTML = error.message;
 }
-);
-
-document.getElementById("status")
-.innerHTML =
-"Pesanan berhasil dikirim!";
-
-form.reset();
-
-}catch(error){
-
-document.getElementById("status")
-.innerHTML =
-"Gagal mengirim pesanan.";
-
-}
-
-});
