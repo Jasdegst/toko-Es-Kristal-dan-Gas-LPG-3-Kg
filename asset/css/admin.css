@@ -64,3 +64,24 @@ th{
 background:#0099ff;
 color:white;
 }
+
+
+.top-bar{
+    margin-bottom:20px;
+}
+
+.back-btn{
+    display:inline-block;
+    padding:12px 20px;
+    background:#0099ff;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.back-btn:hover{
+    background:#0077cc;
+    transform:translateY(-2px);
+}
