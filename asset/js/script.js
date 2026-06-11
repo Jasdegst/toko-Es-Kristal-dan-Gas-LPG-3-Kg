@@ -21,21 +21,26 @@ form.addEventListener("submit", function(e) {
         "&jumlah=" + encodeURIComponent(jumlah) +
         "&alamat=" + encodeURIComponent(alamat);
 
+    console.log(url);
+
     const img = new Image();
 
-    console.log(url);
-    img.src = url;
+    img.onload = function() {
 
-    status.innerHTML = "✅ Pesanan berhasil dikirim!";
+        status.innerHTML =
+            "✅ Pesanan berhasil dikirim!";
 
-    form.reset();
+        form.reset();
+
+    };
+
+    img.onerror = function() {
+
+        status.innerHTML =
+            "❌ Gagal mengirim pesanan!";
+
+    };
+
+    img.src = url + "&t=" + Date.now();
 
 });
-
-
-
-
-
-
-
-
