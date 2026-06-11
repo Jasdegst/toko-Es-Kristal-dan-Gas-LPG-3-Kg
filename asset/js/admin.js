@@ -10,7 +10,7 @@ if(password !== "admin123"){
 
 
 const API =
-"https://script.google.com/macros/s/AKfycbx4axthhPQIbJxZmslGewEKFZ3t1UmOMR4hKI8aDSYXdw9KRGxBC3jEQ7P_9fQMFBdHOQ/exec";
+"https://script.google.com/macros/s/AKfycbwfL3NmROZOnLmFxXvwkD9e30SbJdaEZowIwciP4A_imWxMYtd5k7S9Cge0dNQXoA3k2w/exec";
 
 fetch(API)
 .then(res => res.json())
