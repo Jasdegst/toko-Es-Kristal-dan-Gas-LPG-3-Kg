@@ -87,3 +87,17 @@ color:white;
 }
 
 
+.top-menu{
+display:flex;
+justify-content:space-between;
+margin-bottom:20px;
+}
+
+.logout-btn{
+padding:12px 20px;
+background:#dc3545;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}

@@ -1,13 +1,41 @@
-const password = prompt("Masukkan Password Admin");
+// Cek apakah admin sudah login
+if (localStorage.getItem("adminLogin") !== "true") {
 
-if(password !== "admin123"){
-
-    alert("Akses Ditolak");
-
-    window.location.href = "index.html";
+    window.location.href = "login.html";
 
 }
 
+
+// Cek login
+if (localStorage.getItem("adminLogin") !== "true") {
+
+    window.location.href = "login.html";
+
+}
+
+// Logout
+function logout() {
+
+    Swal.fire({
+        title: "Logout?",
+        text: "Anda akan keluar dari dashboard admin",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Ya, Logout",
+        cancelButtonText: "Batal"
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+
+            localStorage.removeItem("adminLogin");
+
+            window.location.href = "login.html";
+
+        }
+
+    });
+
+}
 
 const API =
 "https://script.google.com/macros/s/AKfycbwfL3NmROZOnLmFxXvwkD9e30SbJdaEZowIwciP4A_imWxMYtd5k7S9Cge0dNQXoA3k2w/exec";
@@ -59,3 +87,5 @@ document.getElementById("totalGas")
 .innerHTML = totalGas;
 
 });
+
+

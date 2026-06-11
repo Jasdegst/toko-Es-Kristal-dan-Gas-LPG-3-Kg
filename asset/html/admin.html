@@ -17,9 +17,19 @@ content="width=device-width, initial-scale=1.0">
 <body>
 
 <div class="container">
-<button class="back-btn" onclick="history.back()">
-    ← Kembali
+
+<div class="top-menu">
+
+<a href="../../index.html"
+class="back-btn">
+🏠 Beranda
+</a>
+
+<button onclick="logout()" class="logout-btn">
+    🚪 Logout
 </button>
+
+</div>
 <h1>Dashboard Admin</h1>
 
 <div class="cards">
@@ -71,7 +81,7 @@ content="width=device-width, initial-scale=1.0">
 </div>
 
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="../js/admin.js"></script>
 
 </body>
