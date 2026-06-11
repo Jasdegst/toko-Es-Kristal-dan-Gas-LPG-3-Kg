@@ -9,9 +9,24 @@ form.addEventListener("submit", function(e) {
 
     const nama = document.getElementById("nama").value;
     const hp = document.getElementById("hp").value;
-    const produk = document.getElementById("produk").value;
+    const produkElement = document.getElementById("produk");
+
+const produk =
+    produkElement.options[
+        produkElement.selectedIndex
+    ].text;
+
     const jumlah = document.getElementById("jumlah").value;
     const alamat = document.getElementById("alamat").value;
+    
+console.log({
+    nama,
+    hp,
+    produk,
+    jumlah,
+    alamat
+});
+
 
     const url =
         "https://script.google.com/macros/s/AKfycbwfL3NmROZOnLmFxXvwkD9e30SbJdaEZowIwciP4A_imWxMYtd5k7S9Cge0dNQXoA3k2w/exec" +
