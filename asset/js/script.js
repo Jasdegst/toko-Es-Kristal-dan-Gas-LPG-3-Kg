@@ -52,7 +52,7 @@ fetch(url, {
         const mapsLink =
         `https://www.google.com/maps?q=${lat},${lng}`;
 
-        const nomorAdmin = "089691780494";
+        const nomorAdmin = "6289691780494";
 
         const pesan =
 `📦 PESANAN BARU
@@ -69,7 +69,7 @@ ${alamat}
 ${mapsLink}`;
 
         window.open(
-            `https://wa.me/${nomorAdmin}?text=${encodeURIComponent(pesan)}`,
+            `https://wa.me/${6289691780494}?text=${encodeURIComponent(pesan)}`,
             "_blank"
         );
 
@@ -77,7 +77,7 @@ ${mapsLink}`;
 
     function(){
 
-        const nomorAdmin = "089691780494";
+        const nomorAdmin = "6289691780494";
 
         const pesan =
 `📦 PESANAN BARU
@@ -91,7 +91,7 @@ ${mapsLink}`;
 ${alamat}`;
 
         window.open(
-            `https://wa.me/${nomorAdmin}?text=${encodeURIComponent(pesan)}`,
+            `https://wa.me/${6289691780494}?text=${encodeURIComponent(pesan)}`,
             "_blank"
         );
 
