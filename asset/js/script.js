@@ -55,7 +55,7 @@ fetch(url, {
         const nomorAdmin = "6289691780494";
 
         const pesan =
-`📦 PESANAN BARU
+`📦 PESANAN BARU, Jual es& Okay,Asimo Sosis
 
 👤 Nama : ${nama}
 📱 HP : ${hp}
@@ -80,7 +80,7 @@ ${mapsLink}`;
         const nomorAdmin = "6289691780494";
 
         const pesan =
-`📦 PESANAN BARU
+`📦 PESANAN BARU, Jual es& Okay,Asimo Sosis
 
 👤 Nama : ${nama}
 📱 HP : ${hp}
