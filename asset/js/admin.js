@@ -24,19 +24,28 @@ fetch(API)
 .then(res => res.json())
 .then(data => {
 
-    console.log("Data diterima:", data);
+    console.log("DATA:", data);
 
     let html = "";
     let totalEs = 0;
     let totalGas = 0;
 
-    for (let i = 1; i < data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
 
         const row = data[i];
 
+        // pastikan data valid
+        if (!row || row.length < 7) continue;
+
+        // =========================
+        // HITUNG PRODUK
+        // =========================
         if (row[4] === "Es Kristal") totalEs++;
         if (row[4] === "Gas LPG 3 Kg") totalGas++;
 
+        // =========================
+        // RENDER TABEL
+        // =========================
         html += `
 <tr>
     <td>${row[0]}</td> <!-- ID -->
@@ -118,19 +127,20 @@ function lihatDetail(tanggal, nama, hp, produk, jumlah, alamat) {
 
 
 // =========================
-// HAPUS (PAKAI ID - FIX FINAL)
+// HAPUS DATA (PAKAI ID)
 // =========================
 
 function hapusPesanan(id) {
 
     Swal.fire({
         title: "Hapus Pesanan?",
-        text: "Data akan dihapus permanen",
+        text: "Data tidak bisa dikembalikan",
         icon: "warning",
         showCancelButton: true,
         confirmButtonText: "Ya, Hapus",
         cancelButtonText: "Batal"
-    }).then((result) => {
+    })
+    .then((result) => {
 
         if (result.isConfirmed) {
 
@@ -138,14 +148,14 @@ function hapusPesanan(id) {
             .then(res => res.json())
             .then(res => {
 
-                console.log("Response:", res);
+                console.log("DELETE RESPONSE:", res);
 
                 if (res.status === "success") {
 
                     Swal.fire({
                         icon: "success",
                         title: "Berhasil",
-                        text: "Pesanan berhasil dihapus"
+                        text: "Data berhasil dihapus"
                     }).then(() => location.reload());
 
                 } else {
@@ -184,10 +194,10 @@ function logout() {
 
     Swal.fire({
         title: "Logout?",
-        text: "Anda akan keluar dari Dashboard Admin",
+        text: "Anda akan keluar dari dashboard",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "Ya, Logout",
+        confirmButtonText: "Ya",
         cancelButtonText: "Batal"
     }).then((result) => {
 
