@@ -26,14 +26,21 @@ console.log("Produk =", produk);
 
     console.log(url);
 
-    fetch(url, {
+fetch(url, {
     method: "GET",
     mode: "no-cors"
 })
 .then(() => {
 
-    status.innerHTML =
-        "✅ Pesanan berhasil dikirim!";
+    Swal.fire({
+        icon: "success",
+        title: "Pesanan Berhasil",
+        text: "Pesanan Anda telah dikirim.",
+        timer: 2000,
+        showConfirmButton: false
+    });
+
+    status.innerHTML = "pesanan sedang diproses...";
 
     form.reset();
 
@@ -42,8 +49,13 @@ console.log("Produk =", produk);
 
     console.error(error);
 
-    status.innerHTML =
-        "❌ Gagal mengirim pesanan!";
+    Swal.fire({
+        icon: "error",
+        title: "Pesanan Gagal",
+        text: "Terjadi kesalahan saat mengirim pesanan."
+    });
+
+    status.innerHTML = "Gagal mengirim pesan. Silakan coba lagi.";
 
 });
 
