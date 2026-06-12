@@ -25,12 +25,14 @@ fetch(API)
 .then(data => {
 
     console.log("DATA:", data);
+    console.log("BARIS PERTAMA:", data[0]);
+    console.log("BARIS KEDUA:", data[1]);
 
     let html = "";
     let totalEs = 0;
     let totalGas = 0;
 
-    for (let i = 0; i < data.length; i++) {
+    for (let i = 1; i < data.length; i++) {
 
         const row = data[i];
 
