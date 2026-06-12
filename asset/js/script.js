@@ -26,24 +26,25 @@ console.log("Produk =", produk);
 
     console.log(url);
 
-    const img = new Image();
+    fetch(url, {
+    method: "GET",
+    mode: "no-cors"
+})
+.then(() => {
 
-    img.onload = function() {
+    status.innerHTML =
+        "✅ Pesanan berhasil dikirim!";
 
-        status.innerHTML =
-            "✅ Pesanan berhasil dikirim!";
+    form.reset();
 
-        form.reset();
+})
+.catch((error) => {
 
-    };
+    console.error(error);
 
-    img.onerror = function() {
+    status.innerHTML =
+        "❌ Gagal mengirim pesanan!";
 
-        status.innerHTML =
-            "❌ Gagal mengirim pesanan!";
-
-    };
-
-    img.src = url + "&t=" + Date.now();
+});
 
 });
