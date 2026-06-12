@@ -24,7 +24,9 @@ fetch(API)
 .then(res => res.json())
 .then(data => {
 
+    console.log("VERSI ADMIN JS 13-06-2026");
     console.log("DATA:", data);
+    console.log("PANJANG DATA:", data.length);
     console.log("BARIS PERTAMA:", data[0]);
     console.log("BARIS KEDUA:", data[1]);
 
