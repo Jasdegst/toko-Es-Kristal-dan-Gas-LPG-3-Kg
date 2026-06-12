@@ -11,10 +11,13 @@ form.addEventListener("submit", function(e) {
     const hp = document.getElementById("hp").value;
     const produk = document.getElementById("produk").value;
 
-    console.log("Produk =", produk);
+console.log("Produk =", produk);
     
     const jumlah = document.getElementById("jumlah").value;
     const alamat = document.getElementById("alamat").value;
+
+    console.log(document.getElementById("produk"));
+console.log(document.querySelector("#produk"));
 
     const url =
         "https://script.google.com/macros/s/AKfycbwfL3NmROZOnLmFxXvwkD9e30SbJdaEZowIwciP4A_imWxMYtd5k7S9Cge0dNQXoA3k2w/exec" +
