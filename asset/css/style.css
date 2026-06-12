@@ -218,16 +218,70 @@ flex-direction:column;
 gap:15px;
 }
 
+/* 1. Memperbesar Card Produk */
+    .produk-grid {
+        /* Mengubah minmax menjadi lebih besar (300px) agar card tidak terlalu kecil */
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+    }
+
+    .card {
+        padding: 30px; /* Menambah ruang di dalam card agar terlihat lebih lega */
+    }
+
 .menu{
 flex-wrap:wrap;
 justify-content:center;
 }
 
-/* Mencegah zoom otomatis saat input di perangkat mobile */
-input, select, textarea {
-    font-size: 16px;
-}
+.form-order {
+        padding: 40px 5%; /* Memberi ruang agar form lebih lebar */
+    }
 
+input, select, textarea {
+        padding: 18px; /* Membuat area ketik lebih tinggi dan nyaman */
+        font-size: 16px; /* Mencegah zoom di iOS */
+    }
+
+
+    /* 1. Menyesuaikan section produk */
+    .produk {
+        padding: 40px 5%; /* Padding lebih kecil agar card lebih lebar */
+    }
+
+    .produk h2 {
+        font-size: 28px; /* Judul sedikit lebih kecil di mobile */
+    }
+
+    /* 2. Memaksa card menjadi 1 kolom penuh agar lebih besar */
+    .produk-grid {
+        grid-template-columns: 1fr; /* Memaksa 1 kolom saja */
+        gap: 20px;
+    }
+
+    .card {
+        padding: 30px; /* Memberi ruang lega di dalam card */
+        text-align: center;
+    }
+
+    /* 3. Menyesuaikan elemen di dalam card agar proporsional */
+    .icon {
+        font-size: 40px; /* Sedikit lebih kecil agar tidak terlalu memakan tempat */
+    }
+
+    .card h3 {
+        font-size: 22px;
+    }
+
+    .card span {
+        font-size: 22px;
+        margin-top: 10px;
+    }
+
+    .form-order {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
 
 }
 
