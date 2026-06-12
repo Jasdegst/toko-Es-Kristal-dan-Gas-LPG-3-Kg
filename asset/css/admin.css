@@ -101,3 +101,33 @@ border:none;
 border-radius:8px;
 cursor:pointer;
 }
+
+
+
+
+.detail-btn{
+    background:#17a2b8;
+    color:white;
+    border:none;
+    padding:8px 12px;
+    border-radius:6px;
+    cursor:pointer;
+    margin-right:5px;
+}
+
+.hapus-btn{
+    background:#dc3545;
+    color:white;
+    border:none;
+    padding:8px 12px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.detail-btn:hover{
+    opacity:.9;
+}
+
+.hapus-btn:hover{
+    opacity:.9;
+}
