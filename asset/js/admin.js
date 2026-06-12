@@ -44,8 +44,18 @@ fetch(API)
         // =========================
         // HITUNG PRODUK
         // =========================
-        if (row[4] === "Es Kristal") totalEs++;
-        if (row[4] === "Gas LPG 3 Kg") totalGas++;
+        if (row[4] === "Es Batu") {
+    totalEs++;
+}
+
+if (
+    row[4] === "Sosis Okay 1kg" ||
+    row[4] === "Sosis Okay 1/2kg" ||
+    row[4] === "Sosis Asimo 1kg" ||
+    row[4] === "Sosis Asimo 1/2kg"
+) {
+    totalGas++;
+}
 
         // =========================
         // RENDER TABEL

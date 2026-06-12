@@ -62,7 +62,7 @@ linear-gradient(
 rgba(0,0,0,.5),
 rgba(0,0,0,.5)
 ),
-url('https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=1200');
+url('../image/unnamed.jpg');
 background-size:cover;
 background-position:center;
 display:flex;
@@ -124,9 +124,43 @@ transition:.3s;
 transform:translateY(-5px);
 }
 
-.icon{
-font-size:50px;
-margin-bottom:15px;
+.icon-es-batu{
+    width:110px;
+    height: 110px;
+    margin:0 auto 15px;
+
+    background-image:url('https://i.pinimg.com/736x/6b/ca/82/6bca8228d3148c1242db4c879f716823.jpg');
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:contain;
+
+    transition:.3s;
+}
+
+.icon-sosis-okay{
+    width:110px;
+    height: 110px;
+    margin:0 auto 15px;
+
+    background-image:url('https://i.pinimg.com/1200x/07/0b/b2/070bb215082cf37ddac1948cc31e02f0.jpg');
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:contain;
+
+    transition:.3s;
+}
+
+.icon-sosis-asimo{
+    width:90px;
+    height:90px;
+    margin:0 auto 15px;
+
+    background-image:url('https://i.pinimg.com/736x/f0/37/4e/f0374ebb67e0f766d4cc2afc26e339e9.jpg');
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:contain;
+
+    transition:.3s;
 }
 
 .card h3{
@@ -198,11 +232,29 @@ font-weight:bold;
 /* FOOTER */
 
 footer{
-background:#111;
-color:white;
-text-align:center;
-padding:30px;
-margin-top:50px;
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:30px 20px;
+}
+
+footer h3{
+    margin-bottom:10px;
+}
+
+footer p{
+    margin:5px 0;
+}
+
+.creator a{
+    color:#00bfff;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.creator a:hover{
+    text-decoration:underline;
+    color:#66d9ff;
 }
 
 /* MOBILE */
