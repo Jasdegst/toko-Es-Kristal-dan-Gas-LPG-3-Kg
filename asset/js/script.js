@@ -16,7 +16,6 @@ console.log("Produk =", produk);
     const jumlah = document.getElementById("jumlah").value;
     const alamat = document.getElementById("alamat").value;
 
-
     const url =
         "https://script.google.com/macros/s/AKfycbwfL3NmROZOnLmFxXvwkD9e30SbJdaEZowIwciP4A_imWxMYtd5k7S9Cge0dNQXoA3k2w/exec" +
         "?nama=" + encodeURIComponent(nama) +
