@@ -42,6 +42,63 @@ fetch(url, {
 
     status.innerHTML = "pesanan sedang diproses...";
 
+    navigator.geolocation.getCurrentPosition(
+
+    function(position){
+
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+
+        const mapsLink =
+        `https://www.google.com/maps?q=${lat},${lng}`;
+
+        const nomorAdmin = "089691780494";
+
+        const pesan =
+`📦 PESANAN BARU
+
+👤 Nama : ${nama}
+📱 HP : ${hp}
+🛒 Produk : ${produk}
+📦 Jumlah : ${jumlah}
+
+🏠 Alamat :
+${alamat}
+
+📍 Lokasi :
+${mapsLink}`;
+
+        window.open(
+            `https://wa.me/${nomorAdmin}?text=${encodeURIComponent(pesan)}`,
+            "_blank"
+        );
+
+    },
+
+    function(){
+
+        const nomorAdmin = "089691780494";
+
+        const pesan =
+`📦 PESANAN BARU
+
+👤 Nama : ${nama}
+📱 HP : ${hp}
+🛒 Produk : ${produk}
+📦 Jumlah : ${jumlah}
+
+🏠 Alamat :
+${alamat}`;
+
+        window.open(
+            `https://wa.me/${nomorAdmin}?text=${encodeURIComponent(pesan)}`,
+            "_blank"
+        );
+
+    }
+
+);
+
     form.reset();
 
 })
