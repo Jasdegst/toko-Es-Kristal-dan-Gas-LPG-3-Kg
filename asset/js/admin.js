@@ -21,7 +21,7 @@ const API = BASE_URL + "?action=list";
 // =========================
 
 fetch(API)
-.then(response => response.json())
+.then(res => res.json())
 .then(data => {
 
     console.log("Data diterima:", data);
@@ -34,17 +34,18 @@ fetch(API)
 
         const row = data[i];
 
-        if (row[3] === "Es Kristal") totalEs++;
-        if (row[3] === "Gas LPG 3 Kg") totalGas++;
+        if (row[4] === "Es Kristal") totalEs++;
+        if (row[4] === "Gas LPG 3 Kg") totalGas++;
 
         html += `
 <tr>
-    <td>${row[0]}</td>  <!-- ID -->
-    <td>${row[1]}</td>
-    <td>${row[2]}</td>
-    <td>${row[3]}</td>
-    <td>${row[4]}</td>
-    <td>${row[5]}</td>
+    <td>${row[0]}</td> <!-- ID -->
+    <td>${row[1]}</td> <!-- Tanggal -->
+    <td>${row[2]}</td> <!-- Nama -->
+    <td>${row[3]}</td> <!-- HP -->
+    <td>${row[4]}</td> <!-- Produk -->
+    <td>${row[5]}</td> <!-- Jumlah -->
+    <td>${row[6]}</td> <!-- Alamat -->
 
     <td>
 
@@ -54,7 +55,8 @@ fetch(API)
             '${row[2]}',
             '${row[3]}',
             '${row[4]}',
-            '${row[5]}'
+            '${row[5]}',
+            '${row[6]}'
         )">
             Detail
         </button>
@@ -78,14 +80,14 @@ fetch(API)
     document.getElementById("totalGas").textContent = totalGas;
 
 })
-.catch(error => {
+.catch(err => {
 
-    console.error("Error Admin:", error);
+    console.error(err);
 
     Swal.fire({
         icon: "error",
         title: "Gagal Memuat Data",
-        text: error.message
+        text: err.message
     });
 
 });
@@ -116,20 +118,19 @@ function lihatDetail(tanggal, nama, hp, produk, jumlah, alamat) {
 
 
 // =========================
-// HAPUS PAKAI ID (FIX UTAMA)
+// HAPUS (PAKAI ID - FIX FINAL)
 // =========================
 
 function hapusPesanan(id) {
 
     Swal.fire({
         title: "Hapus Pesanan?",
-        text: "Data akan dihapus permanen.",
+        text: "Data akan dihapus permanen",
         icon: "warning",
         showCancelButton: true,
         confirmButtonText: "Ya, Hapus",
         cancelButtonText: "Batal"
-    })
-    .then((result) => {
+    }).then((result) => {
 
         if (result.isConfirmed) {
 
@@ -144,7 +145,7 @@ function hapusPesanan(id) {
                     Swal.fire({
                         icon: "success",
                         title: "Berhasil",
-                        text: "Pesanan dihapus"
+                        text: "Pesanan berhasil dihapus"
                     }).then(() => location.reload());
 
                 } else {
