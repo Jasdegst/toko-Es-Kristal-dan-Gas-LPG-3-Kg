@@ -23,17 +23,26 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 padding:15px 8%;
-background:#fff;
+background:#ffffff;
 box-shadow:0 2px 10px rgba(0,0,0,.08);
 position:sticky;
 top:0;
 z-index:999;
 }
 
-.logo{
-font-size:22px;
-font-weight:bold;
-color:#0099ff;
+.logo {
+    display: flex;         /* Mengatur gambar dan teks dalam satu baris */
+    align-items: center;   /* Menyejajarkan posisi vertikal agar sejajar di tengah */
+    gap: 15px;             /* Memberikan jarak antara gambar dan teks */
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+    color: #0e97f1;
+}
+
+.logo img {
+    height: 60px;          /* Mengatur tinggi logo (sesuaikan dengan kebutuhan) */
+    width: auto;           /* Memastikan rasio aspek gambar tetap terjaga */
 }
 
 .menu{
@@ -124,47 +133,53 @@ transition:.3s;
 transform:translateY(-5px);
 }
 
-.icon-es-batu{
-    width:110px;
-    height: 110px;
-    margin:0 auto 15px;
+.produk-img{
+    width:100%;
+    height:220px;
+    margin:0 auto 20px;
 
-    background-image:url('https://i.pinimg.com/736x/6b/ca/82/6bca8228d3148c1242db4c879f716823.jpg');
     background-repeat:no-repeat;
     background-position:center;
-    background-size:contain;
+    background-size:cover;
+
+    border-radius:12px;
 
     transition:.3s;
 }
 
-.icon-sosis-okay{
-    width:110px;
-    height: 110px;
-    margin:0 auto 15px;
 
-    background-image:url('https://i.pinimg.com/1200x/07/0b/b2/070bb215082cf37ddac1948cc31e02f0.jpg');
-    background-repeat:no-repeat;
-    background-position:center;
-    background-size:contain;
-
-    transition:.3s;
+.harga{
+    display:block;
+    margin-top:8px;
+    font-weight:bold;
+    font-size:22px;
+    color:#0d6efd;
 }
 
-.icon-sosis-asimo{
-    width:90px;
-    height:90px;
-    margin:0 auto 15px;
 
-    background-image:url('https://i.pinimg.com/736x/f0/37/4e/f0374ebb67e0f766d4cc2afc26e339e9.jpg');
-    background-repeat:no-repeat;
-    background-position:center;
-    background-size:contain;
+.produk-img:hover{
+    transform:scale(1.05);
+}
 
+.card{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
     transition:.3s;
+    overflow:hidden;
 }
 
 .card h3{
 margin-bottom:10px;
+font-size:22px;
+
+}
+
+.card p{
+    margin-bottom:15px;
+    color:#666;
+    line-height:1.5;
 }
 
 .card span{
@@ -311,6 +326,10 @@ input, select, textarea {
         gap: 20px;
     }
 
+    .produk-img{
+    height:250px;
+}
+
     .card {
         padding: 30px; /* Memberi ruang lega di dalam card */
         text-align: center;
@@ -331,6 +350,33 @@ input, select, textarea {
     }
 
 
+}
+
+
+/* stok */
+
+.stok{
+    display:inline-block;
+    margin-bottom:10px;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.stok-tersedia{
+    background:#d4edda;
+    color:#155724;
+}
+
+.stok-menipis{
+    background:#fff3cd;
+    color:#856404;
+}
+
+.stok-habis{
+    background:#f8d7da;
+    color:#721c24;
 }
 
 

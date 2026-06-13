@@ -225,3 +225,203 @@ function logout() {
     });
 
 }
+
+
+
+// =========================
+// SIMPAN PRODUK
+// =========================
+
+const produkForm =
+document.getElementById("produkForm");
+
+if (produkForm) {
+
+    produkForm.addEventListener(
+        "submit",
+        function(e){
+
+            e.preventDefault();
+
+            const produk =
+            document.getElementById("namaProduk").value;
+
+            const harga =
+            document.getElementById("hargaProduk").value;
+
+            const stok =
+            document.getElementById("stokProduk").value;
+
+            const gambar =
+document.getElementById("gambarProduk").value;
+
+            fetch(
+                BASE_URL +
+                "?action=saveProduk" +
+                "&produk=" + encodeURIComponent(produk) +
+                "&harga=" + encodeURIComponent(harga) +
+                "&stok=" + encodeURIComponent(stok) +
+"&gambar=" + encodeURIComponent(gambar)
+            )
+            .then(res => res.json())
+            .then(res => {
+
+                if(res.status === "success"){
+
+                    Swal.fire({
+                        icon:"success",
+                        title:"Berhasil",
+                        text:"Produk berhasil disimpan"
+                    });
+
+                    produkForm.reset();
+
+                    loadProduk();
+
+                }else{
+
+                    Swal.fire({
+                        icon:"error",
+                        title:"Gagal",
+                        text:res.message
+                    });
+
+                }
+
+            })
+            .catch(err => {
+
+                Swal.fire({
+                    icon:"error",
+                    title:"Error",
+                    text:err.message
+                });
+
+            });
+
+        }
+    );
+
+}
+
+
+// =========================
+// LOAD PRODUK
+// =========================
+
+function loadProduk(){
+
+    fetch(
+        BASE_URL + "?action=listProduk"
+    )
+    .then(res => res.json())
+    .then(data => {
+
+        let html = "";
+
+        for(let i = 1; i < data.length; i++){
+
+            const row = data[i];
+
+            html += `
+<tr>
+    <td>${row[0]}</td>
+
+    <td>
+        Rp ${Number(row[1]).toLocaleString("id-ID")}
+    </td>
+
+    <td>${row[2]}</td>
+
+    <td>
+        <button
+            class="hapus-produk-btn"
+            onclick="hapusProduk(${i})">
+            Hapus
+        </button>
+    </td>
+</tr>
+`;
+        }
+
+        const produkBody =
+        document.getElementById("produkBody");
+
+        if(produkBody){
+
+            produkBody.innerHTML = html;
+
+        }
+
+    })
+    .catch(err => {
+
+        console.error(
+            "Gagal memuat produk",
+            err
+        );
+
+    });
+
+}
+
+
+// =========================
+// JALANKAN SAAT HALAMAN DIBUKA
+// =========================
+
+loadProduk();
+
+
+
+
+
+function hapusProduk(row) {
+
+    Swal.fire({
+        title: "Hapus Produk?",
+        text: "Data produk akan dihapus permanen",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Ya, Hapus",
+        cancelButtonText: "Batal"
+    })
+    .then((result)=>{
+
+        if(result.isConfirmed){
+
+            fetch(
+                BASE_URL +
+                "?action=deleteProduk" +
+                "&row=" + row
+            )
+            .then(res=>res.json())
+            .then(res=>{
+
+                if(res.status==="success"){
+
+                    Swal.fire({
+                        icon:"success",
+                        title:"Berhasil",
+                        text:"Produk berhasil dihapus"
+                    });
+
+                    loadProduk();
+
+                }else{
+
+                    Swal.fire({
+                        icon:"error",
+                        title:"Gagal",
+                        text:res.message
+                    });
+
+                }
+
+            });
+
+        }
+
+    });
+
+}

@@ -5,8 +5,8 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="../image/ChatGPT Image 13 Jun 2026, 04.36.56 - Copy1.png">
 
 <title>Dashboard Admin</title>
 
@@ -18,73 +18,143 @@ content="width=device-width, initial-scale=1.0">
 
 <div class="container">
 
-<div class="top-menu">
+    <div class="top-menu">
 
-<a href="../../index.html"
-class="back-btn">
-🏠 Beranda
-</a>
+        <a href="../../index.html" class="back-btn">
+            🏠 Beranda
+        </a>
 
-<button onclick="logout()" class="logout-btn">
-    🚪 Logout
-</button>
+        <button onclick="logout()" class="logout-btn">
+            🚪 Logout
+        </button>
+
+    </div>
+
+    <h1>Dashboard Admin</h1>
+
+    <!-- KARTU DASHBOARD -->
+
+    <div class="cards">
+
+        <div class="card">
+            <h2 id="totalOrder">0</h2>
+            <p>Total Pesanan</p>
+        </div>
+
+        <div class="card">
+            <h2 id="totalEs">0</h2>
+            <p>Es Batu</p>
+        </div>
+
+        <div class="card">
+            <h2 id="totalGas">0</h2>
+            <p>Total Sosis</p>
+        </div>
+
+    </div>
+
+    <!-- TABEL PESANAN -->
+
+    <div class="table-box">
+
+        <h2>Pesanan Terbaru</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Tanggal</th>
+                    <th>Nama</th>
+                    <th>HP</th>
+                    <th>Produk</th>
+                    <th>Jumlah</th>
+                    <th>Alamat</th>
+                    <th>Aksi</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="tableBody">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- FORM PRODUK -->
+
+    <div class="produk-box">
+
+        <h2>Kelola Produk</h2>
+
+        <form id="produkForm">
+
+            <input
+                type="text"
+                id="namaProduk"
+                placeholder="Nama Produk"
+                required>
+
+            <input
+                type="number"
+                id="hargaProduk"
+                placeholder="Harga Produk"
+                required>
+
+            <input
+                type="number"
+                id="stokProduk"
+                placeholder="Stok Produk"
+                required>
+
+            <input
+                 type="text"
+                 id="gambarProduk"
+                 placeholder="URL Gambar Produk"
+                required>    
+
+            <button type="submit">
+                Simpan Produk
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- TABEL PRODUK -->
+
+    <div class="produk-box">
+
+        <h2>Daftar Produk</h2>
+
+        <table class="produk-table">
+
+            <thead>
+
+                <tr>
+                    <th>Produk</th>
+                    <th>Harga</th>
+                    <th>Stok</th>
+                    <th>Aksi</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="produkBody">
+
+            </tbody>
+
+        </table>
+
+    </div>
 
 </div>
-<h1>Dashboard Admin</h1>
 
-<div class="cards">
-
-<div class="card">
-<h2 id="totalOrder">0</h2>
-<p>Total Pesanan</p>
-</div>
-
-<div class="card">
-<h2 id="totalEs">0</h2>
-<p>Es Batu</p>
-</div>
-
-<div class="card">
-<h2 id="totalGas">0</h2>
-<p>Total Sosis</p>
-</div>
-
-</div>
-
-<div class="table-box">
-
-<h2>Pesanan Terbaru</h2>
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>ID</th>
-<th>Tanggal</th>
-<th>Nama</th>
-<th>HP</th>
-<th>Produk</th>
-<th>Jumlah</th>
-<th>Alamat</th>
-<th>Aksi</th>
-</tr>
-
-</thead>
-
-<tbody id="tableBody">
-
-</tbody>
-
-</table>
-
-</div>
-
-</div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="../js/admin.js"></script>
 
 </body>
-
 </html>
