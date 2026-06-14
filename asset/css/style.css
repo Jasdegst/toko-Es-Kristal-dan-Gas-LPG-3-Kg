@@ -400,3 +400,138 @@ input, select, textarea {
 }
 
 
+/* ===========
+    KALKULATOR
+================ */
+
+
+/* ===== BUTTON FLOAT ===== */
+.calc-fab {
+    position: fixed;
+    right: 15px;
+    bottom: 15px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: none;
+    background: #111827;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    z-index: 99999;
+    transition: 0.2s;
+}
+
+.calc-fab:hover {
+    transform: scale(1.05);
+}
+
+/* ===== OVERLAY ===== */
+.calc-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    z-index: 99990;
+}
+
+/* ===== POPUP ===== */
+.calc-popup {
+    position: fixed;
+    right: 15px;
+    bottom: 80px;
+    width: 220px;
+    background: #0f172a;
+    color: white;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    padding: 12px;
+    display: none;
+    z-index: 99999;
+
+    transform: translateY(20px);
+    opacity: 0;
+    transition: 0.25s ease;
+}
+
+/* aktif */
+.calc-popup.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* HEADER */
+.calc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.calc-header button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* DISPLAY */
+#calcDisplay {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px; /* FIX iOS ZOOM */
+    text-align: right;
+    border-radius: 10px;
+    border: none;
+    background: #1f2937;
+    color: white;
+    margin-bottom: 10px;
+    outline: none;
+}
+
+/* BUTTON GRID */
+.calc-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+}
+
+.calc-buttons button {
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #1f2937;
+    color: white;
+    transition: 0.15s;
+}
+
+.calc-buttons button:hover {
+    background: #374151;
+}
+
+.calc-buttons button:active {
+    transform: scale(0.95);
+}
+
+/* ===== MOBILE MODE ===== */
+@media (max-width: 768px) {
+
+    .calc-popup {
+        width: 100%;
+        height: 50vh; /* setengah layar */
+        right: 0;
+        bottom: 0;
+        border-radius: 20px 20px 0 0;
+        padding: 14px;
+    }
+
+    .calc-buttons button {
+        padding: 12px;
+        font-size: 15px;
+    }
+}

@@ -147,8 +147,49 @@
 
 </footer>
 
+<!-- FLOAT BUTTON -->
+<button class="calc-fab" onclick="toggleCalc()">
+    
+</button>
+
+<!-- POPUP KALKULATOR -->
+<div class="calc-popup" id="calcPopup">
+
+    <div class="calc-header">
+        <span>Kalkulator</span>
+        <button onclick="toggleCalc()">✖</button>
+    </div>
+
+    <input type="text" id="calcDisplay" readonly>
+
+    <div class="calc-buttons">
+        <button onclick="press('7')">7</button>
+        <button onclick="press('8')">8</button>
+        <button onclick="press('9')">9</button>
+        <button onclick="press('/')">÷</button>
+
+        <button onclick="press('4')">4</button>
+        <button onclick="press('5')">5</button>
+        <button onclick="press('6')">6</button>
+        <button onclick="press('*')">×</button>
+
+        <button onclick="press('1')">1</button>
+        <button onclick="press('2')">2</button>
+        <button onclick="press('3')">3</button>
+        <button onclick="press('-')">-</button>
+
+        <button onclick="press('0')">0</button>
+        <button onclick="backspace()">⌫</button>
+        <button onclick="calculate()">=</button>
+        <button onclick="press('+')">+</button>
+        <button onclick="clearCalc()">C</button>
+    </div>
+
+</div>
+<div class="calc-overlay" id="calcOverlay" onclick="toggleCalc()"></div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="asset/js/script.js"></script>
+<script src="asset/js/kalkulator.js"></script>
 
 </body>
 

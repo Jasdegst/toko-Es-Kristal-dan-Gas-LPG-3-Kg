@@ -20,10 +20,10 @@ function loadProduk() {
 
         for (let i = 1; i < data.length; i++) {
 
-            const produk = data[i][0];
-            const harga = Number(data[i][1]);
-            const stok = Number(data[i][2]);
-            const gambar = data[i][3] || "";
+            const produk = data[i][1];
+            const harga = Number(data[i][2]);
+            const stok = Number(data[i][3]);
+            const gambar = data[i][4] || "";
 
             let classStok = "stok-tersedia";
 
@@ -44,6 +44,7 @@ function loadProduk() {
                 </div>
 
                 <h3>${produk}</h3>
+                <p>Hanya dapat pengantaran Orderan terdekat saja</P>
 
                 <small class="stok ${classStok}">
                     Stok : ${stok}
@@ -98,10 +99,10 @@ function loadProdukSelect() {
         for (let i = 1; i < data.length; i++) {
 
             const namaProduk =
-            data[i][0];
+            data[i][1];
 
             const stok =
-            Number(data[i][2]);
+            Number(data[i][3]);
 
             if (stok > 0) {
 
