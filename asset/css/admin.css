@@ -257,9 +257,14 @@ cursor:pointer;
     }
 
     /* Table box */
-    .table-box {
-        overflow-x: auto;
+   .produk-box {
+        padding: 15px;
+        overflow-x: auto; /* penting supaya bisa scroll */
+        border-radius: 12px;
     }
+
+
+    
 
     table {
         width: 100%;
@@ -276,6 +281,18 @@ cursor:pointer;
     .produk-box {
         padding: 15px;
     }
+
+
+    /* Scroll halus di mobile */
+    .produk-box::-webkit-scrollbar {
+        height: 6px;
+    }
+
+     .produk-box::-webkit-scrollbar-thumb {
+        background: rgba(255,255,255,0.2);
+        border-radius: 10px;
+    }
+
 
     /* Form Produk */
     #produkForm {
@@ -294,10 +311,27 @@ cursor:pointer;
         font-size: 16px;
     }
 
-    /* Tabel Produk */
+     /* TABLE */
     .produk-table {
         width: 100%;
-        font-size: 14px;
+        min-width: 600px; /* kunci agar tidak gepeng */
+        border-collapse: collapse;
     }
+
+
+     .produk-table th,
+    .produk-table td {
+        padding: 10px;
+        font-size: 13px;
+        white-space: nowrap; /* biar teks tidak patah & rusak layout */
+    }
+
+     /* HEADER tetap terbaca */
+    .produk-table thead {
+        background: rgba(255,255,255,0.05);
+    }
+
+
+
 
 }
