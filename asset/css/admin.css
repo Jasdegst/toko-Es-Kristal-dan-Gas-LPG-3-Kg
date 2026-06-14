@@ -213,3 +213,91 @@ cursor:pointer;
 
 
 
+/* =========================
+   MOBILE DASHBOARD ADMIN
+========================= */
+
+@media (max-width: 768px) {
+
+    /* Container */
+    .container {
+        padding: 15px;
+    }
+
+    /* Top Menu */
+    .top-menu {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+    }
+
+    .back-btn,
+    .logout-btn {
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    /* Judul */
+    h1 {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    /* Cards Dashboard */
+    .cards {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    /* Table box */
+    .table-box {
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        font-size: 14px;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 10px;
+        white-space: nowrap;
+    }
+
+    /* Produk Box */
+    .produk-box {
+        padding: 15px;
+    }
+
+    /* Form Produk */
+    #produkForm {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    #produkForm input {
+        padding: 14px;
+        font-size: 16px;
+    }
+
+    #produkForm button {
+        padding: 14px;
+        font-size: 16px;
+    }
+
+    /* Tabel Produk */
+    .produk-table {
+        width: 100%;
+        font-size: 14px;
+    }
+
+}
