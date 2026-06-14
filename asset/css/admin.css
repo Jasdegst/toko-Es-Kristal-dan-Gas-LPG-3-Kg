@@ -175,6 +175,11 @@ cursor:pointer;
     background:#218838;
 }
 
+
+/* ==============
+DAFTAR PRODUK
+================= */
+
 .produk-table{
     width:100%;
     border-collapse:collapse;
@@ -184,6 +189,7 @@ cursor:pointer;
 .produk-table td{
     padding:12px;
     border-bottom:1px solid #ddd;
+    width: 180px;   /* bisa kamu ubah sesuai kebutuhan */
     text-align:left;
 }
 
@@ -191,26 +197,6 @@ cursor:pointer;
     background:#28a745;
     color:white;
 }
-
-
-.hapus-produk-btn{
-
-    background:#dc3545;
-    color:#fff;
-    border:none;
-    padding:8px 15px;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:bold;
-
-}
-
-.hapus-produk-btn:hover{
-
-    background:#bb2d3b;
-
-}
-
 
 
 /* =========================

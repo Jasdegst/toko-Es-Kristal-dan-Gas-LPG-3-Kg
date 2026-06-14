@@ -110,6 +110,10 @@ fetch(API)
 
 
 
+// ==================
+// DATA TOTAL PESAN 
+// ==================
+
 
 function loadDashboardProduk(dataPesanan){
 
@@ -133,7 +137,7 @@ function loadDashboardProduk(dataPesanan){
         for(let i = 1; i < dataProduk.length; i++){
 
             const namaProduk =
-            dataProduk[i][0];
+            dataProduk[i][1]; // ✅ FIX: kolom 2 (Nama Produk)
 
             let total = 0;
 
@@ -355,119 +359,149 @@ document.getElementById("gambarProduk").value;
 // LOAD PRODUK
 // =========================
 
-function loadProduk(){
+function loadProduk() {
 
-    fetch(
-        BASE_URL + "?action=listProduk"
-    )
-    .then(res => res.json())
-    .then(data => {
+    fetch(BASE_URL + "?action=listProduk")
+        .then(res => res.json())
+        .then(data => {
 
-        let html = "";
+            let html = "";
 
-        for(let i = 1; i < data.length; i++){
+            for (let i = 1; i < data.length; i++) {
 
-            const row = data[i];
+                const row = data[i];
 
-            html += `
+                html += `
 <tr>
-    <td>${row[0]}</td>
-
-    <td>
-        Rp ${Number(row[1]).toLocaleString("id-ID")}
-    </td>
-
-    <td>${row[2]}</td>
+    <td>${row[1]}</td>
+    <td>Rp ${Number(row[2]).toLocaleString("id-ID")}</td>
+    <td>${row[3]}</td>
 
     <td>
         <button
-            class="hapus-produk-btn"
-            onclick="hapusProduk(${i})">
-            Hapus
-        </button>
+    class="detail-btn"
+    onclick="editProduk('${row[0]}')">
+    Edit
+</button>
+         <button
+        class="hapus-btn"
+        onclick="hapusProduk('${row[0]}')">
+        Hapus
+    </button>
     </td>
 </tr>
 `;
-        }
+            }
 
-        const produkBody =
-        document.getElementById("produkBody");
-
-        if(produkBody){
-
-            produkBody.innerHTML = html;
-
-        }
-
-    })
-    .catch(err => {
-
-        console.error(
-            "Gagal memuat produk",
-            err
-        );
-
-    });
-
+            document.getElementById("produkBody").innerHTML = html;
+        });
 }
 
 
+
 // =========================
-// JALANKAN SAAT HALAMAN DIBUKA
+// EDIT PRODUK
 // =========================
 
-loadProduk();
-
-
-
-
-
-function hapusProduk(row) {
+function editProduk(id, oldData = {}) {
 
     Swal.fire({
-        title: "Hapus Produk?",
-        text: "Data produk akan dihapus permanen",
-        icon: "warning",
+        title: 'Edit Produk',
+        html:
+            `<input id="nama" class="swal2-input" placeholder="Nama Produk" value="${oldData.nama || ''}">
+             <input id="harga" class="swal2-input" placeholder="Harga" value="${oldData.harga || ''}">
+             <input id="stok" class="swal2-input" placeholder="Stok" value="${oldData.stok || ''}">
+             <input id="gambar" class="swal2-input" placeholder="URL Gambar" value="${oldData.gambar || ''}">`,
+
+        focusConfirm: false,
         showCancelButton: true,
-        confirmButtonText: "Ya, Hapus",
-        cancelButtonText: "Batal"
-    })
-    .then((result)=>{
+        confirmButtonText: 'Simpan',
+        preConfirm: () => {
 
-        if(result.isConfirmed){
+            return {
+                produk: document.getElementById('nama').value,
+                harga: document.getElementById('harga').value,
+                stok: document.getElementById('stok').value,
+                gambar: document.getElementById('gambar').value
+            }
+        }
+    }).then((result) => {
 
-            fetch(
-                BASE_URL +
-                "?action=deleteProduk" +
-                "&row=" + row
-            )
-            .then(res=>res.json())
-            .then(res=>{
+        if (result.isConfirmed) {
 
-                if(res.status==="success"){
+            const data = result.value;
 
-                    Swal.fire({
-                        icon:"success",
-                        title:"Berhasil",
-                        text:"Produk berhasil dihapus"
-                    });
+            fetch(BASE_URL + "?" + new URLSearchParams({
+                action: "editProduk",
+                id: id,
+                produk: data.produk,
+                harga: data.harga,
+                stok: data.stok,
+                gambar: data.gambar
+            }))
+            .then(res => res.json())
+            .then(() => {
 
-                    loadProduk();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: 'Produk berhasil diupdate',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
 
-                }else{
-
-                    Swal.fire({
-                        icon:"error",
-                        title:"Gagal",
-                        text:res.message
-                    });
-
-                }
+                loadProduk();
 
             });
 
         }
 
     });
+}
 
+
+// =========================
+// JALANKAN SAAT HALAMAN DIBUKA/ HAPUS PRODUK
+// =========================
+
+loadProduk();
+
+
+function hapusProduk(id) {
+
+    Swal.fire({
+        title: 'Yakin hapus produk?',
+        text: "Data tidak bisa dikembalikan!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#ef4444',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Ya, hapus!',
+        cancelButtonText: 'Batal'
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+
+            fetch(BASE_URL + "?" + new URLSearchParams({
+                action: "deleteProduk",
+                id: id
+            }))
+            .then(res => res.json())
+            .then(() => {
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Terhapus!',
+                    text: 'Produk berhasil dihapus',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+
+                loadProduk();
+
+            });
+
+        }
+
+    });
 }

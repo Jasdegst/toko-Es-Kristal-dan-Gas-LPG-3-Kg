@@ -39,3 +39,73 @@ color:white;
 border-radius:8px;
 cursor:pointer;
 }
+
+
+
+
+@media (max-width: 768px) {
+
+    /* BODY CENTERING (kalau belum ada) */
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+        background: #f1f5f9;
+    }
+
+    /* LOGIN BOX */
+    .login-box {
+        width: 100%;
+        max-width: 350px;
+        padding: 25px;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        background: white;
+        text-align: center;
+    }
+
+    /* JUDUL */
+    .login-box h2 {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    /* INPUT */
+    .login-box input {
+        width: 100%;
+        padding: 14px;
+        margin-bottom: 12px;
+        border-radius: 10px;
+        border: 1px solid #e2e8f0;
+        font-size: 16px;
+        outline: none;
+    }
+
+    .login-box input:focus {
+        border-color: #3b82f6;
+    }
+
+    /* BUTTON */
+    .login-box button {
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 10px;
+        background: #3b82f6;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .login-box button:hover {
+        background: #2563eb;
+        transform: translateY(-1px);
+    }
+
+    .login-box button:active {
+        transform: scale(0.98);
+    }
+}
