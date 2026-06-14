@@ -24,87 +24,86 @@ fetch(API)
 .then(res => res.json())
 .then(data => {
 
-    console.log("VERSI ADMIN JS 13-06-2026");
     console.log("DATA:", data);
-    loadDashboardProduk(data);
-    console.log("PANJANG DATA:", data.length);
-    console.log("BARIS PERTAMA:", data[0]);
-    console.log("BARIS KEDUA:", data[1]);
+
+    // Jalankan dashboard produk jika fungsi ada
+    if (typeof loadDashboardProduk === "function") {
+        loadDashboardProduk(data);
+    }
 
     let html = "";
-    let totalEs = 0;
-    let totalGas = 0;
 
     for (let i = 1; i < data.length; i++) {
 
         const row = data[i];
 
-        // pastikan data valid
         if (!row || row.length < 7) continue;
 
-        // =========================
-        // HITUNG PRODUK
-        // =========================
-        if (row[4] === "Es Batu") {
-    totalEs++;
-}
-
-if (
-    row[4] === "Sosis Okay 1kg" ||
-    row[4] === "Sosis Okay 1/2kg" ||
-    row[4] === "Sosis Asimo 1kg" ||
-    row[4] === "Sosis Asimo 1/2kg"
-) {
-    totalGas++;
-}
-
-        // =========================
-        // RENDER TABEL
-        // =========================
         html += `
-<tr>
-    <td>${row[0]}</td> <!-- ID -->
-    <td>${row[1]}</td> <!-- Tanggal -->
-    <td>${row[2]}</td> <!-- Nama -->
-    <td>${row[3]}</td> <!-- HP -->
-    <td>${row[4]}</td> <!-- Produk -->
-    <td>${row[5]}</td> <!-- Jumlah -->
-    <td>${row[6]}</td> <!-- Alamat -->
+        <tr>
+            <td>${row[0] || ""}</td>
+            <td>${row[1] || ""}</td>
+            <td>${row[2] || ""}</td>
+            <td>${row[3] || ""}</td>
+            <td>${row[4] || ""}</td>
+            <td>${row[5] || ""}</td>
+            <td>${row[6] || ""}</td>
 
-    <td>
+            <td>
 
-        <button class="detail-btn"
-        onclick="lihatDetail(
-            '${row[1]}',
-            '${row[2]}',
-            '${row[3]}',
-            '${row[4]}',
-            '${row[5]}',
-            '${row[6]}'
-        )">
-            Detail
-        </button>
+                <button
+                    class="detail-btn"
+                    onclick="lihatDetail(
+                        '${row[1] || ""}',
+                        '${row[2] || ""}',
+                        '${row[3] || ""}',
+                        '${row[4] || ""}',
+                        '${row[5] || ""}',
+                        '${row[6] || ""}'
+                    )">
+                    Detail
+                </button>
 
-        <button class="hapus-btn"
-        onclick="hapusPesanan('${row[0]}')">
-            Hapus
-        </button>
+                <button
+                    class="hapus-btn"
+                    onclick="hapusPesanan('${row[0]}')">
+                    Hapus
+                </button>
 
-    </td>
-</tr>
+            </td>
+        </tr>
         `;
     }
 
-    
+    // Isi tabel jika elemen ada
+    const tableBody =
+    document.getElementById("tableBody");
+
+    if (tableBody) {
+        tableBody.innerHTML = html;
+    }
+
+    // Isi total order jika elemen ada
+    const totalOrder =
+    document.getElementById("totalOrder");
+
+    if (totalOrder) {
+        totalOrder.textContent =
+        Math.max(data.length - 1, 0);
+    }
+
 })
 .catch(err => {
 
-    console.error(err);
+    console.error("ERROR :", err);
+    console.error("STACK :", err.stack);
 
     Swal.fire({
         icon: "error",
         title: "Gagal Memuat Data",
-        text: err.message
+        text:
+        err.message ||
+        "Terjadi kesalahan saat memuat data."
     });
 
 });

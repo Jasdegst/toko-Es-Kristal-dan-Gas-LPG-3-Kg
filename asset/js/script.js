@@ -7,10 +7,8 @@ const BASE_URL =
 
 
 // =========================
-// LOAD PRODUK DARI SHEET
+// LOAD PRODUK KE CARD
 // =========================
-
-loadProduk();
 
 function loadProduk() {
 
@@ -18,14 +16,12 @@ function loadProduk() {
     .then(res => res.json())
     .then(data => {
 
-        console.log("DATA PRODUK:", data);
-
         let html = "";
 
         for (let i = 1; i < data.length; i++) {
 
             const produk = data[i][0];
-            const harga = data[i][1];
+            const harga = Number(data[i][1]);
             const stok = Number(data[i][2]);
             const gambar = data[i][3] || "";
 
@@ -49,21 +45,13 @@ function loadProduk() {
 
                 <h3>${produk}</h3>
 
-                <p>
-                    Produk tersedia untuk wilayah terdekat.
-                </p>
-
                 <small class="stok ${classStok}">
                     Stok : ${stok}
                 </small>
 
                 <span class="harga">
-                    Rp ${Number(harga).toLocaleString("id-ID")}
+                    Rp ${harga.toLocaleString("id-ID")}
                 </span>
-
-                <br>
-
-                
 
             </div>
             `;
@@ -73,16 +61,60 @@ function loadProduk() {
         document.getElementById("produkGrid");
 
         if (produkGrid) {
-
             produkGrid.innerHTML = html;
-
-        } else {
-
-            console.error(
-                "Elemen #produkGrid tidak ditemukan!"
-            );
-
         }
+
+    })
+    .catch(err => {
+        console.error(
+            "Gagal memuat produk:",
+            err
+        );
+    });
+
+}
+
+
+// =========================
+// LOAD PRODUK KE SELECT
+// =========================
+
+function loadProdukSelect() {
+
+    fetch(BASE_URL + "?action=listProduk")
+    .then(res => res.json())
+    .then(data => {
+
+        const select =
+        document.getElementById("produk");
+
+        if (!select) return;
+
+        let html =
+        `<option value="">
+            Pilih Produk
+        </option>`;
+
+        for (let i = 1; i < data.length; i++) {
+
+            const namaProduk =
+            data[i][0];
+
+            const stok =
+            Number(data[i][2]);
+
+            if (stok > 0) {
+
+                html += `
+                <option value="${namaProduk}">
+                    ${namaProduk}
+                    (Stok ${stok})
+                </option>
+                `;
+            }
+        }
+
+        select.innerHTML = html;
 
     })
     .catch(err => {
@@ -97,57 +129,6 @@ function loadProduk() {
 }
 
 
-
-// =========================
-// LOAD PRODUK KE DROPDOWN
-// =========================
-
-function loadProdukSelect(){
-
-    fetch(BASE_URL + "?action=listProduk")
-    .then(res => res.json())
-    .then(data => {
-
-        const select =
-        document.getElementById("produk");
-
-        let html =
-        '<option value="">Pilih Produk</option>';
-
-        for(let i = 1; i < data.length; i++){
-
-            const namaProduk = data[i][0];
-            const stok = Number(data[i][2]);
-
-            // tampilkan hanya jika stok tersedia
-            if(stok > 0){
-
-                html += `
-                <option value="${namaProduk}">
-                    ${namaProduk} - Stok ${stok}
-                </option>
-                `;
-            }
-
-        }
-
-        select.innerHTML = html;
-
-    })
-    .catch(err => {
-
-        console.error(
-            "Gagal memuat produk",
-            err
-        );
-
-    });
-
-}
-
-
-
-
 // =========================
 // FORM PEMESANAN
 // =========================
@@ -158,87 +139,105 @@ document.getElementById("orderForm");
 const status =
 document.getElementById("status");
 
-if(form){
+if (form) {
 
-form.addEventListener("submit", function(e) {
+    form.addEventListener(
+    "submit",
+    function (e) {
 
-    e.preventDefault();
+        e.preventDefault();
 
-    status.innerHTML =
-    "Mengirim pesanan...";
+        status.innerHTML =
+        "Mengirim pesanan...";
 
-    const nama =
-    document.getElementById("nama").value;
+        const nama =
+        document.getElementById("nama").value;
 
-    const hp =
-    document.getElementById("hp").value;
+        const hp =
+        document.getElementById("hp").value;
 
-    const produk =
-    document.getElementById("produk").value;
+        const produk =
+        document.getElementById("produk").value;
 
-    const jumlah =
-    document.getElementById("jumlah").value;
+        const jumlah =
+        document.getElementById("jumlah").value;
 
-    const alamat =
-    document.getElementById("alamat").value;
+        const alamat =
+        document.getElementById("alamat").value;
 
-    const url =
-        BASE_URL +
-        "?nama=" + encodeURIComponent(nama) +
-        "&hp=" + encodeURIComponent(hp) +
-        "&produk=" + encodeURIComponent(produk) +
-        "&jumlah=" + encodeURIComponent(jumlah) +
-        "&alamat=" + encodeURIComponent(alamat);
+        if (!produk) {
 
-    fetch(url)
-.then(res => res.json())
-.then(res => {
+            Swal.fire({
+                icon: "warning",
+                title: "Pilih Produk",
+                text:
+                "Silakan pilih produk."
+            });
 
-    console.log(res);
+            return;
+        }
 
-    if(res.status !== "success"){
+        const url =
+            BASE_URL +
+            "?nama=" +
+            encodeURIComponent(nama) +
+            "&hp=" +
+            encodeURIComponent(hp) +
+            "&produk=" +
+            encodeURIComponent(produk) +
+            "&jumlah=" +
+            encodeURIComponent(jumlah) +
+            "&alamat=" +
+            encodeURIComponent(alamat);
 
-        Swal.fire({
-            icon: "error",
-            title: "Pesanan Ditolak",
-            text: res.message
-        });
+        fetch(url)
+        .then(res => res.json())
+        .then(res => {
 
-        return;
-    }
+            if (res.status !== "success") {
 
-    Swal.fire({
-        icon: "success",
-        title: "Pesanan Berhasil",
-        html: `
-            <b>ID Pesanan:</b><br>
-            ${res.id}
-            <br><br>
-            <b>Sisa Stok:</b><br>
-            ${res.stok}
-        `
-    });
+                Swal.fire({
+                    icon: "error",
+                    title:
+                    "Pesanan Ditolak",
+                    text:
+                    res.message
+                });
 
-    status.innerHTML =
-    "Pesanan sedang diproses...";
+                return;
+            }
 
-    // refresh stok produk
-    loadProduk();
+            Swal.fire({
+                icon: "success",
+                title:
+                "Pesanan Berhasil",
+                html: `
+                    <b>ID Pesanan:</b><br>
+                    ${res.id}
+                    <br><br>
+                    <b>Sisa Stok:</b><br>
+                    ${res.stok}
+                `
+            });
 
-    navigator.geolocation.getCurrentPosition(
+            status.innerHTML =
+            "Pesanan sedang diproses...";
 
-        function(position){
+            navigator.geolocation
+            .getCurrentPosition(
 
-            const lat =
-            position.coords.latitude;
+                function(position){
 
-            const lng =
-            position.coords.longitude;
+                    const lat =
+                    position.coords.latitude;
 
-            const mapsLink =
-            `https://www.google.com/maps?q=${lat},${lng}`;
+                    const lng =
+                    position.coords.longitude;
 
-            const pesan =
+                    const mapsLink =
+                    `https://www.google.com/maps?q=${lat},${lng}`;
+
+                    const pesan =
 `📦 PESANAN BARU
 
 🆔 ID : ${res.id}
@@ -254,16 +253,16 @@ ${alamat}
 📍 Lokasi :
 ${mapsLink}`;
 
-            window.open(
-                `https://wa.me/6289691780494?text=${encodeURIComponent(pesan)}`,
-                "_blank"
-            );
+                    window.open(
+                        `https://wa.me/6289691780494?text=${encodeURIComponent(pesan)}`,
+                        "_blank"
+                    );
 
-        },
+                },
 
-        function(){
+                function(){
 
-            const pesan =
+                    const pesan =
 `📦 PESANAN BARU
 
 🆔 ID : ${res.id}
@@ -276,37 +275,42 @@ ${mapsLink}`;
 🏠 Alamat :
 ${alamat}`;
 
-            window.open(
-                `https://wa.me/6289691780494?text=${encodeURIComponent(pesan)}`,
-                "_blank"
+                    window.open(
+                        `https://wa.me/6289691780494?text=${encodeURIComponent(pesan)}`,
+                        "_blank"
+                    );
+
+                }
+
             );
 
-        }
+            form.reset();
 
-    );
+            loadProduk();
+            loadProdukSelect();
 
-    form.reset();
+        })
+        .catch(error => {
 
-    loadProduk();
-loadProdukSelect();
+            console.error(error);
 
-})
-.catch(error => {
+            Swal.fire({
+                icon: "error",
+                title: "Server Error",
+                text:
+                "Gagal terhubung ke server."
+            });
 
-    console.error(error);
+        });
 
-    Swal.fire({
-        icon: "error",
-        title: "Server Error",
-        text: "Gagal terhubung ke server."
     });
-
-});
-
-});
 
 }
 
+
+// =========================
+// JALANKAN SAAT HALAMAN DIBUKA
+// =========================
 
 loadProduk();
 loadProdukSelect();

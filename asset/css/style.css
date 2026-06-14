@@ -190,6 +190,26 @@ font-weight:bold;
 color:#0099ff;
 }
 
+/* BUTTON BELI */
+
+.beli-btn{
+    width:100%;
+    margin-top:15px;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#28a745;
+    color:#fff;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.beli-btn:hover{
+    background:#218838;
+    transform:translateY(-2px);
+}
+
 /* FORM */
 
 .form-order{
