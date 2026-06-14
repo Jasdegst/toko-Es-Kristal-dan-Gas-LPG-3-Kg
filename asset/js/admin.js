@@ -26,6 +26,7 @@ fetch(API)
 
     console.log("VERSI ADMIN JS 13-06-2026");
     console.log("DATA:", data);
+    loadDashboardProduk(data);
     console.log("PANJANG DATA:", data.length);
     console.log("BARIS PERTAMA:", data[0]);
     console.log("BARIS KEDUA:", data[1]);
@@ -94,14 +95,7 @@ if (
         `;
     }
 
-    document.getElementById("tableBody").innerHTML = html;
-
-    document.getElementById("totalOrder").textContent =
-        Math.max(data.length - 1, 0);
-
-    document.getElementById("totalEs").textContent = totalEs;
-    document.getElementById("totalGas").textContent = totalGas;
-
+    
 })
 .catch(err => {
 
@@ -114,6 +108,59 @@ if (
     });
 
 });
+
+
+
+
+function loadDashboardProduk(dataPesanan){
+
+    fetch(BASE_URL + "?action=listProduk")
+    .then(res => res.json())
+    .then(dataProduk => {
+
+        const cards =
+        document.getElementById("dashboardCards");
+
+        let html = "";
+
+        // Total pesanan
+        html += `
+        <div class="card">
+            <h2>${Math.max(dataPesanan.length - 1, 0)}</h2>
+            <p>Total Pesanan</p>
+        </div>
+        `;
+
+        for(let i = 1; i < dataProduk.length; i++){
+
+            const namaProduk =
+            dataProduk[i][0];
+
+            let total = 0;
+
+            for(let j = 1; j < dataPesanan.length; j++){
+
+                if(
+                    dataPesanan[j][4] === namaProduk
+                ){
+                    total++;
+                }
+
+            }
+
+            html += `
+            <div class="card">
+                <h2>${total}</h2>
+                <p>${namaProduk}</p>
+            </div>
+            `;
+        }
+
+        cards.innerHTML = html;
+
+    });
+
+}
 
 
 // =========================
